@@ -13,6 +13,7 @@
 **TailwindClassMerge for PHP** allows you to merge multiple [Tailwind CSS](https://tailwindcss.com/) classes and automatically resolves conflicts between classes by removing classes conflicting with a class defined later.
 
 A PHP port of [tailwind-merge](https://github.com/dcastil/tailwind-merge) by [dcastil](https://github.com/dcastil).
+And clone and improve from [tailwind-merge-php](https://github.com/gehrisandro/tailwind-merge-php) by [gehrisandro](https:://github.com/gehrisandro).
 
 Supports Tailwind v3.0 up to v3.3.
 
