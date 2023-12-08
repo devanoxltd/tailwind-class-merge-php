@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Refactor validators
 - Replace ArbitraryUrlValidator with ArbitraryImageValidator
 - Split arbitrary and non-arbitrary validators into distinct validators
-- Ssplit touch class group into touch, touch-x, touch-y and touch-pz
+- Split touch class group into touch, touch-x, touch-y and touch-pz
 - Tests against PHP 8.3
 
 ### Fixed
