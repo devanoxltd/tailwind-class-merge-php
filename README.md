@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./art/example.png" width="600" alt="TailwindClassMerge for PHP">
+    <img src="https://raw.githubusercontent.com/devanoxLtd/tailwind-class-merge-php/main/art/example.png" width="600" alt="TailwindClassMerge for PHP">
     <p align="center">
         <a href="https://github.com/devanoxLtd/tailwind-class-merge-php/actions"><img alt="GitHub Workflow Status (main)" src="https://img.shields.io/github/actions/workflow/status/devanoxLtd/tailwind-class-merge-php/tests.yml?branch=main&label=tests&style=round-square"></a>
         <a href="https://packagist.org/packages/devanox/tailwind-class-merge-php"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/devanox/tailwind-class-merge-php"></a>
@@ -27,8 +27,8 @@ If you find this package helpful, please consider sponsoring the maintainer:
 ## Table of Contents
 - [Get Started](#get-started)
 - [Usage](#usage)
+- [Cache](#cache)
 - [Configuration](#configuration)
-  - [Custom Tailwind Config](#custom-tailwind-config)
 - [Contributing](#contributing)
 
 ## Get Started
@@ -113,13 +113,47 @@ $tw->merge(['h-10', 'h-20'], 'h-30'); // h-30
 $tw->merge(['h-10', 'h-20'], 'h-30', ['h-40']); // h-40
 ```
 
+## Cache
+For a better performance, `TailwindClassMerge` can cache the results of the merge operation.
+To activate pass your cache instance to the `withCache` method.
+
+It accepts any [PSR-16](https://www.php-fig.org/psr/psr-16/) compatible cache implementation.
+
+```php
+TailwindClassMerge::factory()
+  ->withCache($cache)
+  ->make();
+```
+
+When you are making changes to the configuration make sure to clear the cache.
+
 ## Configuration
 
-> **Note:** To do
+If you are using Tailwind CSS without any extra config, you can use TailwindClassMerge right away. And stop reading here.
 
-### Custom Tailwind Config
+If you're using a custom Tailwind config, you may need to configure TailwindClassMerge as well to merge classes properly.
 
-> **Note:** To do
+By default TailwindClassMerge is configured in a way that you can still use it if all the following apply to your Tailwind config:
+
+- Only using color names which don't clash with other Tailwind class names
+- Only deviating by number values from number-based Tailwind classes
+- Only using font-family classes which don't clash with default font-weight classes
+- Sticking to default Tailwind config for everything else
+
+If some of these points don't apply to you, you need to customize the configuration.
+
+This is an example to add a custom font size of "very-large":
+```php
+TailwindClassMerge::factory()->withConfiguration([
+        'classGroups' => [
+            'font-size' => [
+                ['text' => ['very-large']]
+            ],
+        ],
+    ])->make();
+```
+
+For a more detailed explanation of the configuration options, visit the [original package documentation](https://github.com/dcastil/tailwind-merge/blob/v1.14.0/docs/configuration.md).
 
 ## Contributing
 

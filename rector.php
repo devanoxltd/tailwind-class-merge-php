@@ -5,7 +5,6 @@ declare(strict_types=1);
 use Rector\Config\RectorConfig;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
-use Rector\TypeDeclaration\Rector\ClassMethod\AddArrayReturnDocTypeRector;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
@@ -13,7 +12,6 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->skip([
-        __DIR__ . '/src/Support/Config.php' => AddArrayReturnDocTypeRector::class,
         \Rector\Php71\Rector\ClassConst\PublicConstantVisibilityRector::class,
         \Rector\Php81\Rector\ClassConst\FinalizePublicClassConstantRector::class,
         \Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector::class,

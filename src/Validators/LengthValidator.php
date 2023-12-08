@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
  */
 class LengthValidator implements \TailwindClassMerge\Contracts\ValidatorContract
 {
-    const FRACTION_REGEX = '/^\d+\/\d+$/';
+    final const FRACTION_REGEX = '/^\d+\/\d+$/';
 
     public static function validate(string $value): bool
     {
@@ -22,11 +22,7 @@ class LengthValidator implements \TailwindClassMerge\Contracts\ValidatorContract
             return true;
         }
 
-        if (Str::isMatch(self::FRACTION_REGEX, $value)) {
-            return true;
-        }
-
-        return ArbitraryLengthValidator::validate($value);
+        return Str::isMatch(self::FRACTION_REGEX, $value);
     }
 
     /**
@@ -34,6 +30,6 @@ class LengthValidator implements \TailwindClassMerge\Contracts\ValidatorContract
      */
     private static function stringLengths(): Collection
     {
-        return collect(['px', 'full', 'screen']);
+        return Collection::make(['px', 'full', 'screen']);
     }
 }

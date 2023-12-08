@@ -13,11 +13,7 @@ class IntegerValidator implements \TailwindClassMerge\Contracts\ValidatorContrac
 
     public static function validate(string $value): bool
     {
-        if (self::isIntegerOnly($value)) {
-            return true;
-        }
-
-        return self::getIsArbitraryValue($value, 'number', self::isIntegerOnly(...));
+        return self::isIntegerOnly($value);
     }
 
     private static function isIntegerOnly(string $value): bool

@@ -8,8 +8,8 @@ test('is integer', function ($input, $output) {
     ['1', true],
     ['123', true],
     ['8312', true],
-    ['[8312]', true],
-    ['[2]', true],
+    ['[8312]', false],
+    ['[2]', false],
     ['[8312px]', false],
     ['[8312%]', false],
     ['[8312rem]', false],
@@ -19,4 +19,5 @@ test('is integer', function ($input, $output) {
     ['1/2', false],
     ['1%', false],
     ['1px', false],
+    ['', false],
 ]);

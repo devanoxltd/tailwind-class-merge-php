@@ -12,7 +12,7 @@ class ArbitraryLengthValidator implements \TailwindClassMerge\Contracts\Validato
 {
     use ValidatesArbitraryValue;
 
-    const LENGTH_UNIT_REGEX = '/\d+(%|px|r?em|[sdl]?v([hwib]|min|max)|pt|pc|in|cm|mm|cap|ch|ex|r?lh|cq(w|h|i|b|min|max))|^0$/';
+    final const LENGTH_UNIT_REGEX = '/\d+(%|px|r?em|[sdl]?v([hwib]|min|max)|pt|pc|in|cm|mm|cap|ch|ex|r?lh|cq(w|h|i|b|min|max))|\b(calc|min|max|clamp)\(.+\)|^0$/';
 
     public static function validate(string $value): bool
     {

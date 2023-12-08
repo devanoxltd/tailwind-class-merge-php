@@ -10,11 +10,11 @@ use TailwindClassMerge\ValueObjects\ParsedClass;
 
 class TailwindClassParser
 {
-    const CLASS_PART_SEPARATOR = '-';
+    final const CLASS_PART_SEPARATOR = '-';
 
-    const ARBITRARY_PROPERTY_REGEX = '/^\[(.+)\]$/';
+    final const ARBITRARY_PROPERTY_REGEX = '/^\[(.+)\]$/';
 
-    const IMPORTANT_MODIFIER = '!';
+    final const IMPORTANT_MODIFIER = '!';
 
     private readonly ClassPartObject $classMap;
 
@@ -51,7 +51,7 @@ class TailwindClassParser
 
         $classRest = implode(self::CLASS_PART_SEPARATOR, $classParts);
 
-        return collect($classPartObject->validators)->first(fn (ClassValidatorObject $validator) => ($validator->validator)($classRest))?->classGroupId;
+        return Collection::make($classPartObject->validators)->first(fn (ClassValidatorObject $validator) => ($validator->validator)($classRest))?->classGroupId;
     }
 
     public function parse(string $class): ParsedClass
@@ -60,7 +60,7 @@ class TailwindClassParser
             'modifiers' => $modifiers,
             'hasImportantModifier' => $hasImportantModifier,
             'baseClassName' => $baseClassName,
-            'maybePostfixModifierPosition' => $maybePostfixModifierPosition
+            'maybePostfixModifierPosition' => $maybePostfixModifierPosition,
         ] = $this->splitModifiers($class);
 
         $classGroupId = $this->getClassGroupId($maybePostfixModifierPosition ? Str::substr($baseClassName, 0, $maybePostfixModifierPosition) : $baseClassName);
@@ -151,8 +151,7 @@ class TailwindClassParser
             $currentCharacter = $className[$index];
 
             if ($bracketDepth === 0) {
-                if (
-                    $currentCharacter === $firstSeparatorCharacter &&
+                if ($currentCharacter === $firstSeparatorCharacter &&
                     ($isSeparatorSingleCharacter ||
                         Str::substr($className, $index, $separatorLength) === $separator)
                 ) {
@@ -176,10 +175,8 @@ class TailwindClassParser
             }
         }
 
-        $baseClassNameWithImportantModifier =
-            $modifiers === [] ? $className : Str::substr($className, $modifierStart);
-        $hasImportantModifier =
-            Str::startsWith($baseClassNameWithImportantModifier, self::IMPORTANT_MODIFIER);
+        $baseClassNameWithImportantModifier = $modifiers === [] ? $className : Str::substr($className, $modifierStart);
+        $hasImportantModifier = Str::startsWith($baseClassNameWithImportantModifier, self::IMPORTANT_MODIFIER);
         $baseClassName = $hasImportantModifier
             ? Str::substr($baseClassNameWithImportantModifier, 1)
             : $baseClassNameWithImportantModifier;
@@ -216,7 +213,7 @@ class TailwindClassParser
             $isArbitraryVariant = $modifier[0] === '[';
 
             if ($isArbitraryVariant) {
-                $sortedModifiers = $sortedModifiers->concat([...$unsortedModifiers->sort(), $modifier]);
+                $sortedModifiers = $sortedModifiers->concat([...$unsortedModifiers->sort()->all(), $modifier]);
                 $unsortedModifiers = Collection::make();
             } else {
                 $unsortedModifiers->add($modifier);

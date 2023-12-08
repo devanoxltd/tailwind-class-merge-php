@@ -2,13 +2,14 @@
 
 namespace TailwindClassMerge\Support;
 
+use Illuminate\Support\Collection;
 use TailwindClassMerge\ValueObjects\ClassPartObject;
 use TailwindClassMerge\ValueObjects\ClassValidatorObject;
 use TailwindClassMerge\ValueObjects\ThemeGetter;
 
 class ClassMap
 {
-    const CLASS_PART_SEPARATOR = '-';
+    final const CLASS_PART_SEPARATOR = '-';
 
     /**
      * @param  array{cacheSize: int, prefix: ?string, theme: array<string, mixed>, classGroups: array<string, mixed>,conflictingClassGroups: array<string, array<int, string>>, conflictingClassGroupModifiers: array<string, array<int, string>>}  $config
@@ -42,14 +43,16 @@ class ClassMap
             return $classGroupEntries;
         }
 
-        return collect($classGroupEntries)->mapWithKeys(function (array $classGroup, string $classGroupId) use ($prefix): array {
-            $prefixedClassGroup = collect($classGroup)->map(function (string|array $classDefinition) use ($prefix): string|array {
+        // @phpstan-ignore-next-line
+        return Collection::make($classGroupEntries)->mapWithKeys(function (array $classGroup, string $classGroupId) use ($prefix): array {
+            $prefixedClassGroup = Collection::make($classGroup)->map(function (string|array $classDefinition) use ($prefix): string|array {
                 if (is_string($classDefinition)) {
                     return $prefix . $classDefinition;
                 }
 
                 if (is_array($classDefinition)) {
-                    return collect($classDefinition)->mapWithKeys(fn (array $value, string $key): array => [$prefix . $key => $value])->all();
+                    return Collection::make($classDefinition)
+                        ->mapWithKeys(fn (array $value, string $key): array => [$prefix . $key => $value])->all();
                 }
 
                 //                return $classDefinition;

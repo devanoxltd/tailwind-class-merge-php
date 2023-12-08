@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
  */
 class TshirtSizeValidator implements \TailwindClassMerge\Contracts\ValidatorContract
 {
-    const T_SHIRT_UNIT_REGEX = '/^(\d+(\.\d+)?)?(xs|sm|md|lg|xl)$/';
+    final const T_SHIRT_UNIT_REGEX = '/^(\d+(\.\d+)?)?(xs|sm|md|lg|xl)$/';
 
     public static function validate(string $value): bool
     {

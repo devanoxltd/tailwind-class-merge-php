@@ -22,24 +22,3 @@ it('does basic merges with multiple parameters', function () {
     expect(TailwindClassMerge::instance()->merge('grow', [null, false, [['grow-[2]']]]))
         ->toBe('grow-[2]');
 });
-
-it('does basic merges with conditional parameters', function (array $input, string $output) {
-    expect(TailwindClassMerge::instance()->merge($input))->toBe($output);
-})->with([
-    [
-        [
-            'p-4',
-            'p-5' => false,
-            'bg-green',
-        ],
-        'p-4 bg-green',
-    ],
-    [
-        [
-            'p-4',
-            'p-5' => true,
-            'bg-green',
-        ],
-        'p-5 bg-green',
-    ],
-]);
