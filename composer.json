@@ -9,6 +9,11 @@
             "email": "contact@mrchetan.com"
         }
     ],
+
+    "support": {
+        "issues": "https:://github.com/devanoxltd/tailwind-class-merge-php/issues",
+        "source": "https:://github.com/devanoxltd/tailwind-class-merge-php"
+    },
     "require": {
         "php": "^8.2.0",
         "psr/simple-cache": "^3.0",
