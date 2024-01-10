@@ -1,10 +1,10 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/devanoxLtd/tailwind-class-merge-php/main/art/example.png" width="600" alt="TailwindClassMerge for PHP">
+    <img src="https://raw.githubusercontent.com/devanoxltd/tailwind-class-merge-php/main/art/example.png" width="600" alt="TailwindClassMerge for PHP">
     <p align="center">
-        <a href="https://github.com/devanoxLtd/tailwind-class-merge-php/actions"><img alt="GitHub Workflow Status (main)" src="https://img.shields.io/github/actions/workflow/status/devanoxLtd/tailwind-class-merge-php/tests.yml?branch=main&label=tests&style=round-square"></a>
-        <a href="https://packagist.org/packages/devanox/tailwind-class-merge-php"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/devanox/tailwind-class-merge-php"></a>
-        <a href="https://packagist.org/packages/devanox/tailwind-class-merge-php"><img alt="Latest Version" src="https://img.shields.io/packagist/v/devanox/tailwind-class-merge-php"></a>
-        <a href="https://packagist.org/packages/devanox/tailwind-class-merge-php"><img alt="License" src="https://img.shields.io/github/license/devanoxLtd/tailwind-class-merge-php"></a>
+        <a href="https://github.com/devanoxltd/tailwind-class-merge-php/actions"><img alt="GitHub Workflow Status (main)" src="https://img.shields.io/github/actions/workflow/status/devanoxltd/tailwind-class-merge-php/tests.yml?branch=main&label=tests&style=round-square"></a>
+        <a href="https://packagist.org/packages/devanoxltd/tailwind-class-merge-php"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/devanoxltd/tailwind-class-merge-php"></a>
+        <a href="https://packagist.org/packages/devanoxltd/tailwind-class-merge-php"><img alt="Latest Version" src="https://img.shields.io/packagist/v/devanoxltd/tailwind-class-merge-php"></a>
+        <a href="https://packagist.org/packages/devanoxltd/tailwind-class-merge-php"><img alt="License" src="https://img.shields.io/github/license/devanoxltd/tailwind-class-merge-php"></a>
     </p>
 </p>
 
@@ -18,11 +18,11 @@ And clone and improve from [tailwind-merge-php](https://github.com/gehrisandro/t
 Supports Tailwind v3.0 up to v3.3.
 
 If you find this package helpful, please consider sponsoring the maintainer:
-- Devanox Private Limited: **[github.com/sponsors/devanoxLtd](https://github.com/sponsors/devanoxLtd)**
+- Devanox Private Limited: **[github.com/sponsors/devanoxltd](https://github.com/sponsors/devanoxltd)**
 
 > **Attention:** This package is still in early development.
 
-> If you are using **Laravel**, you can use the [TailwindClassMerge for Laravel](https://github.com/devanoxLtd/tailwind-class-merge-laravel)
+> If you are using **Laravel**, you can use the [TailwindClassMerge for Laravel](https://github.com/devanoxltd/tailwind-class-merge-laravel)
 
 ## Table of Contents
 - [Get Started](#get-started)
@@ -38,7 +38,7 @@ If you find this package helpful, please consider sponsoring the maintainer:
 First, install TailwindClassMerge via the [Composer](https://getcomposer.org/) package manager:
 
 ```bash
-composer require devanox/tailwind-class-merge-php
+composer require devanoxltd/tailwind-class-merge-php
 ```
 
 Then, use the `TailwindClassMerge` class to merge your Tailwind CSS classes:
