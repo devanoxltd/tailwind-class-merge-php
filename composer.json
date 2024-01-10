@@ -1,5 +1,5 @@
 {
-    "name": "devanoxltd/tailwind-class-merge-php",
+    "name": "devanox/tailwind-class-merge-php",
     "description": "TailwindClassMerge for PHP merges multiple Tailwind CSS classes by automatically resolving conflicts between them",
     "keywords": ["php", "tailwindcss", "merge", "classes"],
     "license": "MIT",
