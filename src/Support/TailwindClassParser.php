@@ -10,11 +10,11 @@ use TailwindClassMerge\ValueObjects\ParsedClass;
 
 class TailwindClassParser
 {
-    final const CLASS_PART_SEPARATOR = '-';
+    final public const CLASS_PART_SEPARATOR = '-';
 
-    final const ARBITRARY_PROPERTY_REGEX = '/^\[(.+)\]$/';
+    final public const ARBITRARY_PROPERTY_REGEX = '/^\[(.+)\]$/';
 
-    final const IMPORTANT_MODIFIER = '!';
+    final public const IMPORTANT_MODIFIER = '!';
 
     private readonly ClassPartObject $classMap;
 
@@ -31,7 +31,7 @@ class TailwindClassParser
      */
     private static function getGroupRecursive(array $classParts, ClassPartObject $classPartObject): ?string
     {
-        if (empty($classParts)) {
+        if ($classParts === []) {
             return $classPartObject->classGroupId;
         }
 
@@ -45,7 +45,7 @@ class TailwindClassParser
             return $classGroupFromNextClassPart;
         }
 
-        if (empty($classPartObject->validators)) {
+        if ($classPartObject->validators === []) {
             return null;
         }
 
@@ -112,10 +112,10 @@ class TailwindClassParser
             array_shift($classParts);
         }
 
-        return self::getGroupRecursive($classParts, $this->classMap) ?: self::getGroupIdForArbitraryProperty($class);
+        return self::getGroupRecursive($classParts, $this->classMap) ?: $this->getGroupIdForArbitraryProperty($class);
     }
 
-    private static function getGroupIdForArbitraryProperty(string $className): string
+    private function getGroupIdForArbitraryProperty(string $className): string
     {
         if (Str::match(self::ARBITRARY_PROPERTY_REGEX, $className) !== '' && Str::match(self::ARBITRARY_PROPERTY_REGEX, $className) !== '0') {
             $arbitraryPropertyClassName = Str::match(self::ARBITRARY_PROPERTY_REGEX, $className)[1] ?? '';

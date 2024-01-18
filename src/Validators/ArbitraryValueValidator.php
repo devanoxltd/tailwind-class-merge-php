@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
  */
 class ArbitraryValueValidator implements \TailwindClassMerge\Contracts\ValidatorContract
 {
-    final const ARBITRARY_VALUE_REGEX = '/^\[(?:([a-z-]+):)?(.+)\]$/i';
+    final public const ARBITRARY_VALUE_REGEX = '/^\[(?:([a-z-]+):)?(.+)\]$/i';
 
     public static function validate(string $value): bool
     {

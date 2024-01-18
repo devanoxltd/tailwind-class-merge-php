@@ -38,8 +38,11 @@ class Config
         return $config;
     }
 
-    private static function mergePropertyRecursively(array $baseConfig, string $mergeKey, array|bool|float|int|string|null $mergeValue): array|bool|float|int|string|null
-    {
+    private static function mergePropertyRecursively(
+        array $baseConfig,
+        string $mergeKey,
+        array|bool|float|int|string|null $mergeValue
+    ): array|bool|float|int|string|null {
         if (! array_key_exists($mergeKey, $baseConfig)) {
             return $mergeValue;
         }
@@ -60,11 +63,16 @@ class Config
             return $mergeValue;
         }
 
-        if (is_array($mergeValue) && array_is_list($mergeValue) && is_array($baseConfig[$mergeKey]) && array_is_list($baseConfig[$mergeKey])) {
+        if (is_array($mergeValue) &&
+            array_is_list($mergeValue) &&
+            is_array($baseConfig[$mergeKey]) &&
+            array_is_list($baseConfig[$mergeKey])
+        ) {
             return [...$baseConfig[$mergeKey], ...$mergeValue];
         }
 
-        if (is_array($mergeValue) && ! array_is_list($mergeValue) /* && is_array($baseConfig[$mergeKey]) && array_is_list($baseConfig[$mergeKey]) */) {
+        /* && is_array($baseConfig[$mergeKey]) && array_is_list($baseConfig[$mergeKey]) */
+        if (is_array($mergeValue) && ! array_is_list($mergeValue)) {
             if ($baseConfig[$mergeKey] === null) {
                 return $mergeValue;
             }
@@ -86,7 +94,7 @@ class Config
     }
 
     /**
-     * @return  array{cacheSize: int, prefix: ?string, theme: array<string, mixed>, classGroups: array<string, mixed>,conflictingClassGroups: array<string, array<int, string>>, conflictingClassGroupModifiers: array<string, array<int, string>>}
+     * @return array{cacheSize: int, prefix: ?string, theme: array<string, mixed>, classGroups: array<string, mixed>,conflictingClassGroups: array<string, array<int, string>>, conflictingClassGroupModifiers: array<string, array<int, string>>}
      */
     public static function getDefaultConfig(): array
     {
@@ -125,7 +133,13 @@ class Config
                 'blur' => ['none', '', TshirtSizeValidator::validate(...), ArbitraryValueValidator::validate(...)],
                 'brightness' => self::getNumber(),
                 'borderColor' => [$colors],
-                'borderRadius' => ['none', '', 'full', TshirtSizeValidator::validate(...), ArbitraryValueValidator::validate(...)],
+                'borderRadius' => [
+                    'none',
+                    '',
+                    'full',
+                    TshirtSizeValidator::validate(...),
+                    ArbitraryValueValidator::validate(...),
+                ],
                 'borderSpacing' => self::getSpacingWithArbitrary($spacing),
                 'borderWidth' => self::getLengthWithEmptyAndArbitrary(),
                 'contrast' => self::getNumber(),
@@ -134,7 +148,10 @@ class Config
                 'invert' => self::getZeroAndEmpty(),
                 'gap' => self::getSpacingWithArbitrary($spacing),
                 'gradientColorStops' => [$colors],
-                'gradientColorStopPositions' => [PercentValidator::validate(...), ArbitraryLengthValidator::validate(...)],
+                'gradientColorStopPositions' => [
+                    PercentValidator::validate(...),
+                    ArbitraryLengthValidator::validate(...),
+                ],
                 'inset' => self::getSpacingWithAutoAndArbitrary($spacing),
                 'margin' => self::getSpacingWithAutoAndArbitrary($spacing),
                 'opacity' => self::getNumber(),
@@ -229,13 +246,13 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/float
                  */
-                'float' => [['float' => ['right', 'left', 'none']]],
+                'float' => [['float' => ['right', 'left', 'none', 'start', 'end']]],
                 /**
                  * Clear
                  *
                  * @see https://tailwindcss.com/docs/clear
                  */
-                'clear' => [['clear' => ['left', 'right', 'both', 'none']]],
+                'clear' => [['clear' => ['left', 'right', 'both', 'none', 'start', 'end']]],
                 /**
                  * Isolation
                  *
@@ -404,7 +421,17 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/order
                  */
-                'order' => [['order' => ['first', 'last', 'none', IntegerValidator::validate(...), ArbitraryValueValidator::validate(...)]]],
+                'order' => [
+                    [
+                        'order' => [
+                            'first',
+                            'last',
+                            'none',
+                            IntegerValidator::validate(...),
+                            ArbitraryValueValidator::validate(...),
+                        ],
+                    ],
+                ],
                 /**
                  * Grid Template Columns
                  *
@@ -416,7 +443,21 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/grid-column
                  */
-                'col-start-end' => [['col' => ['auto', ['span' => ['full', IntegerValidator::validate(...), ArbitraryValueValidator::validate(...)]], ArbitraryValueValidator::validate(...)]]],
+                'col-start-end' => [
+                    [
+                        'col' => [
+                            'auto',
+                            [
+                                'span' => [
+                                    'full',
+                                    IntegerValidator::validate(...),
+                                    ArbitraryValueValidator::validate(...),
+                                ],
+                            ],
+                            ArbitraryValueValidator::validate(...),
+                        ],
+                    ],
+                ],
                 /**
                  * Grid Column Start
                  *
@@ -440,7 +481,20 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/grid-row
                  */
-                'row-start-end' => [['row' => ['auto', ['span' => [IntegerValidator::validate(...), ArbitraryValueValidator::validate(...)]], ArbitraryValueValidator::validate(...)]]],
+                'row-start-end' => [
+                    [
+                        'row' => [
+                            'auto',
+                            [
+                                'span' => [
+                                    IntegerValidator::validate(...),
+                                    ArbitraryValueValidator::validate(...),
+                                ],
+                            ],
+                            ArbitraryValueValidator::validate(...),
+                        ],
+                    ],
+                ],
                 /**
                  * Grid Row Start
                  *
@@ -682,13 +736,37 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/width
                  */
-                'w' => [['w' => ['auto', 'min', 'max', 'fit', ArbitraryValueValidator::validate(...), $spacing]]],
+                'w' => [
+                    [
+                        'w' => [
+                            'auto',
+                            'min',
+                            'max',
+                            'fit',
+                            'svw',
+                            'lvw',
+                            'dvw',
+                            ArbitraryValueValidator::validate(...),
+                            $spacing,
+                        ],
+                    ],
+                ],
                 /**
                  * Min-Width
                  *
                  * @see https://tailwindcss.com/docs/min-width
                  */
-                'min-w' => [['min-w' => ['min', 'max', 'fit', ArbitraryValueValidator::validate(...), LengthValidator::validate(...)]]],
+                'min-w' => [
+                    [
+                        'min-w' => [
+                            'min',
+                            'max',
+                            'fit',
+                            ArbitraryValueValidator::validate(...),
+                            LengthValidator::validate(...),
+                        ],
+                    ],
+                ],
                 /**
                  * Max-Width
                  *
@@ -697,7 +775,8 @@ class Config
                 'max-w' => [
                     [
                         'max-w' => [
-                            '0',
+                            ArbitraryValueValidator::validate(...),
+                            $spacing,
                             'none',
                             'full',
                             'min',
@@ -706,7 +785,6 @@ class Config
                             'prose',
                             ['screen' => [TshirtSizeValidator::validate(...)]],
                             TshirtSizeValidator::validate(...),
-                            ArbitraryValueValidator::validate(...),
                         ],
                     ],
                 ],
@@ -715,26 +793,80 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/height
                  */
-                'h' => [['h' => [ArbitraryValueValidator::validate(...), $spacing, 'auto', 'min', 'max', 'fit']]],
+                'h' => [
+                    [
+                        'h' => [
+                            ArbitraryValueValidator::validate(...),
+                            $spacing,
+                            'auto',
+                            'min',
+                            'max',
+                            'fit',
+                            'svh',
+                            'lvh',
+                            'dvh',
+                        ],
+                    ],
+                ],
                 /**
                  * Min-Height
                  *
                  * @see https://tailwindcss.com/docs/min-height
                  */
-                'min-h' => [['min-h' => ['min', 'max', 'fit', LengthValidator::validate(...), ArbitraryValueValidator::validate(...)]]],
+                'min-h' => [
+                    [
+                        'min-h' => [
+                            ArbitraryValueValidator::validate(...),
+                            $spacing,
+                            'min',
+                            'max',
+                            'fit',
+                            'svh',
+                            'lvh',
+                            'dvh',
+                        ],
+                    ],
+                ],
                 /**
                  * Max-Height
                  *
                  * @see https://tailwindcss.com/docs/max-height
                  */
-                'max-h' => [['max-h' => [ArbitraryValueValidator::validate(...), $spacing, 'min', 'max', 'fit']]],
+                'max-h' => [
+                    [
+                        'max-h' => [
+                            ArbitraryValueValidator::validate(...),
+                            $spacing,
+                            'min',
+                            'max',
+                            'fit',
+                            'svh',
+                            'lvh',
+                            'dvh',
+                        ],
+                    ],
+                ],
+                /**
+                 * Size
+                 *
+                 * @see https://tailwindcss.com/docs/size
+                 */
+                'size' => [['size' => [ArbitraryValueValidator::validate(...), $spacing, 'auto', 'min', 'max', 'fit']]],
                 // Typography
                 /**
                  * Font Size
                  *
                  * @see https://tailwindcss.com/docs/font-size
                  */
-                'font-size' => [['text' => ['base', TshirtSizeValidator::validate(...), ArbitraryLengthValidator::validate(...)]]],
+                'font-size' => [
+                    [
+                        'text' => [
+                            'base',
+                            TshirtSizeValidator::validate(...),
+                            ArbitraryLengthValidator::validate(...),
+                        ],
+                    ],
+                ],
                 /**
                  * Font Smoothing
                  *
@@ -833,7 +965,15 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/line-clamp
                  */
-                'line-clamp' => [['line-clamp' => ['none', NumberValidator::validate(...), ArbitraryNumberValidator::validate(...)]]],
+                'line-clamp' => [
+                    [
+                        'line-clamp' => [
+                            'none',
+                            NumberValidator::validate(...),
+                            ArbitraryNumberValidator::validate(...),
+                        ],
+                    ],
+                ],
                 /**
                  * Line Height
                  *
@@ -919,13 +1059,30 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/text-decoration-thickness
                  */
-                'text-decoration-thickness' => [['decoration' => ['auto', 'from-font', LengthValidator::validate(...), ArbitraryLengthValidator::validate(...)]]],
+                'text-decoration-thickness' => [
+                    [
+                        'decoration' => [
+                            'auto',
+                            'from-font',
+                            LengthValidator::validate(...),
+                            ArbitraryLengthValidator::validate(...),
+                        ],
+                    ],
+                ],
                 /**
                  * Text Underline Offset
                  *
                  * @see https://tailwindcss.com/docs/text-underline-offset
                  */
-                'underline-offset' => [['underline-offset' => ['auto', LengthValidator::validate(...), ArbitraryValueValidator::validate(...)]]],
+                'underline-offset' => [
+                    [
+                        'underline-offset' => [
+                            'auto',
+                            LengthValidator::validate(...),
+                            ArbitraryValueValidator::validate(...),
+                        ],
+                    ],
+                ],
                 /**
                  * Text Decoration Color
                  *
@@ -944,6 +1101,12 @@ class Config
                  * @see https://tailwindcss.com/docs/text-overflow
                  */
                 'text-overflow' => ['truncate', 'text-ellipsis', 'text-clip'],
+                /**
+                 * Text Wrap
+                 *
+                 * @see https://tailwindcss.com/docs/text-wrap
+                 */
+                'text-wrap' => [['text' => ['wrap', 'nowrap', 'balance', 'pretty']]],
                 /**
                  * Text Indent
                  *
@@ -1348,13 +1511,27 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/outline-offset
                  */
-                'outline-offset' => [['outline-offset' => [LengthValidator::validate(...), ArbitraryValueValidator::validate(...)]]],
+                'outline-offset' => [
+                    [
+                        'outline-offset' => [
+                            LengthValidator::validate(...),
+                            ArbitraryValueValidator::validate(...),
+                        ],
+                    ],
+                ],
                 /**
                  * Outline Width
                  *
                  * @see https://tailwindcss.com/docs/outline-width
                  */
-                'outline-w' => [['outline' => [LengthValidator::validate(...), ArbitraryLengthValidator::validate(...)]]],
+                'outline-w' => [
+                    [
+                        'outline' => [
+                            LengthValidator::validate(...),
+                            ArbitraryLengthValidator::validate(...),
+                        ],
+                    ],
+                ],
                 /**
                  * Outline Color
                  *
@@ -1390,7 +1567,14 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/ring-offset-width
                  */
-                'ring-offset-w' => [['ring-offset' => [LengthValidator::validate(...), ArbitraryLengthValidator::validate(...)]]],
+                'ring-offset-w' => [
+                    [
+                        'ring-offset' => [
+                            LengthValidator::validate(...),
+                            ArbitraryLengthValidator::validate(...),
+                        ],
+                    ],
+                ],
                 /**
                  * Ring Offset Color
                  *
@@ -1403,7 +1587,17 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/box-shadow
                  */
-                'shadow' => [['shadow' => ['', 'inner', 'none', TshirtSizeValidator::validate(...), ArbitraryShadowValidator::validate(...)]]],
+                'shadow' => [
+                    [
+                        'shadow' => [
+                            '',
+                            'inner',
+                            'none',
+                            TshirtSizeValidator::validate(...),
+                            ArbitraryShadowValidator::validate(...),
+                        ],
+                    ],
+                ],
                 /**
                  * Box Shadow Color
                  *
@@ -1459,7 +1653,16 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/drop-shadow
                  */
-                'drop-shadow' => [['drop-shadow' => ['', 'none', TshirtSizeValidator::validate(...), ArbitraryValueValidator::validate(...)]]],
+                'drop-shadow' => [
+                    [
+                        'drop-shadow' => [
+                            '',
+                            'none',
+                            TshirtSizeValidator::validate(...),
+                            ArbitraryValueValidator::validate(...),
+                        ],
+                    ],
+                ],
                 /**
                  * Grayscale
                  *
@@ -1631,7 +1834,18 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/animation
                  */
-                'animate' => [['animate' => ['none', 'spin', 'ping', 'pulse', 'bounce', ArbitraryValueValidator::validate(...)]]],
+                'animate' => [
+                    [
+                        'animate' => [
+                            'none',
+                            'spin',
+                            'ping',
+                            'pulse',
+                            'bounce',
+                            ArbitraryValueValidator::validate(...),
+                        ],
+                    ],
+                ],
                 // Transforms
                 /**
                  * Transform
@@ -1720,7 +1934,7 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/appearance
                  */
-                'appearance' => ['appearance-none'],
+                'appearance' => [['appearance' => ['none', 'auto']]],
                 /**
                  * Cursor
                  *
@@ -1977,7 +2191,15 @@ class Config
                  * @see https://tailwindcss.com/docs/will-change
                  */
                 'will-change' => [
-                    ['will-change' => ['auto', 'scroll', 'contents', 'transform', ArbitraryValueValidator::validate(...)]],
+                    [
+                        'will-change' => [
+                            'auto',
+                            'scroll',
+                            'contents',
+                            'transform',
+                            ArbitraryValueValidator::validate(...),
+                        ],
+                    ],
                 ],
                 // SVG
                 /**
@@ -1991,7 +2213,15 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/stroke-width
                  */
-                'stroke-w' => [['stroke' => [LengthValidator::validate(...), ArbitraryLengthValidator::validate(...), ArbitraryNumberValidator::validate(...)]]],
+                'stroke-w' => [
+                    [
+                        'stroke' => [
+                            LengthValidator::validate(...),
+                            ArbitraryLengthValidator::validate(...),
+                            ArbitraryNumberValidator::validate(...),
+                        ],
+                    ],
+                ],
                 /**
                  * Stroke
                  *
@@ -2005,6 +2235,12 @@ class Config
                  * @see https://tailwindcss.com/docs/screen-readers
                  */
                 'sr' => ['sr-only', 'not-sr-only'],
+                /**
+                 * Forced Color Adjust
+                 *
+                 * @see https://tailwindcss.com/docs/forced-color-adjust
+                 */
+                'forced-color-adjust' => [['forced-color-adjust' => ['auto', 'none']]],
             ],
             'conflictingClassGroups' => [
                 'overflow' => ['overflow-x', 'overflow-y'],
@@ -2020,6 +2256,7 @@ class Config
                 'm' => ['mx', 'my', 'ms', 'me', 'mt', 'mr', 'mb', 'ml'],
                 'mx' => ['mr', 'ml'],
                 'my' => ['mt', 'mb'],
+                'size' => ['w', 'h'],
                 'font-size' => ['leading'],
                 'fvn-normal' => [
                     'fvn-ordinal',
@@ -2033,6 +2270,7 @@ class Config
                 'fvn-figure' => ['fvn-normal'],
                 'fvn-spacing' => ['fvn-normal'],
                 'fvn-fraction' => ['fvn-normal'],
+                'line-clamp' => ['display', 'overflow'],
                 'rounded' => [
                     'rounded-s',
                     'rounded-e',

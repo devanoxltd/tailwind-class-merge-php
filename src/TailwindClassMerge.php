@@ -62,7 +62,10 @@ class TailwindClassMerge implements TailwindClassMergeContract
 
                     $conflictingClassGroups[$classId] = true;
 
-                    foreach (self::getConflictingClassGroupIds($class->classGroupId, $class->hasPostfixModifier) as $group) {
+                    foreach ($this->getConflictingClassGroupIds(
+                        $class->classGroupId,
+                        $class->hasPostfixModifier
+                    ) as $group) {
                         $conflictingClassGroups[$class->modifierId . $group] = true;
                     }
 
@@ -77,7 +80,7 @@ class TailwindClassMerge implements TailwindClassMergeContract
     /**
      * @return array<array-key, string>
      */
-    private static function getConflictingClassGroupIds(string $classGroupId, bool $hasPostfixModifier): array
+    private function getConflictingClassGroupIds(string $classGroupId, bool $hasPostfixModifier): array
     {
         $conflicts = Config::getMergedConfig()['conflictingClassGroups'][$classGroupId] ?? [];
 
@@ -90,7 +93,7 @@ class TailwindClassMerge implements TailwindClassMergeContract
 
     private function withCache(string $input, Closure $callback): string
     {
-        if ($this->cache === null) {
+        if (! $this->cache instanceof CacheInterface) {
             return $callback($input);
         }
 

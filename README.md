@@ -15,7 +15,7 @@
 A PHP port of [tailwind-merge](https://github.com/dcastil/tailwind-merge) by [dcastil](https://github.com/dcastil).
 And clone and improve from [tailwind-merge-php](https://github.com/gehrisandro/tailwind-merge-php) by [gehrisandro](https://github.com/gehrisandro).
 
-Supports Tailwind v3.0 up to v3.3.
+Supports Tailwind v3.0 up to v3.4.
 
 If you find this package helpful, please consider sponsoring the maintainer:
 - Devanox Private Limited: **[github.com/sponsors/devanoxltd](https://github.com/sponsors/devanoxltd)**

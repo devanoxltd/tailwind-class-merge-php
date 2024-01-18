@@ -9,7 +9,7 @@ use TailwindClassMerge\ValueObjects\ThemeGetter;
 
 class ClassMap
 {
-    final const CLASS_PART_SEPARATOR = '-';
+    final public const CLASS_PART_SEPARATOR = '-';
 
     /**
      * @param  array{cacheSize: int, prefix: ?string, theme: array<string, mixed>, classGroups: array<string, mixed>,conflictingClassGroups: array<string, array<int, string>>, conflictingClassGroupModifiers: array<string, array<int, string>>}  $config
