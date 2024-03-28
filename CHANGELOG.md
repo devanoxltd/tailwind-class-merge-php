@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v2.0.0 (2024-01-18)
+### Added
+-   Add support for Laravel 11
+
+### Updated
+-   Update package dependencies
+
 ## v1.1.0 (2024-01-18)
 ### Added
 -   Add support for Tailwind CSS v3.4
