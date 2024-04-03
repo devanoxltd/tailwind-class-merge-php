@@ -1,7 +1,19 @@
 {
     "name": "devanoxltd/tailwind-class-merge-php",
     "description": "TailwindClassMerge for PHP merges multiple Tailwind CSS classes by automatically resolving conflicts between them",
-    "keywords": ["php", "tailwindcss", "merge", "classes"],
+    "keywords": [
+        "php",
+        "tailwindcss",
+        "tailwind",
+        "merge",
+        "classes",
+        "css",
+        "utility",
+        "utilities",
+        "class",
+        "devanox",
+        "devanoxltd"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -9,7 +21,6 @@
             "email": "contact@mrchetan.com"
         }
     ],
-
     "support": {
         "issues": "https://github.com/devanoxltd/tailwind-class-merge-php/issues",
         "source": "https://github.com/devanoxltd/tailwind-class-merge-php"
@@ -17,18 +28,18 @@
     "require": {
         "php": "^8.2.0",
         "psr/simple-cache": "^3.0",
-        "illuminate/support": "v11.1.1"
+        "illuminate/support": "^v11.2.0"
     },
     "require-dev": {
-        "laravel/pint": "v1.15.0",
+        "laravel/pint": "^v1.15.1",
         "nunomaduro/collision": "^v8.1.1",
-        "pestphp/pest": "v2.34.6",
+        "pestphp/pest": "^v2.34.6",
         "pestphp/pest-plugin-arch": "^v2.7.0",
         "pestphp/pest-plugin-mock": "^2.0",
-        "pestphp/pest-plugin-type-coverage": "v2.8.1",
-        "phpstan/phpstan": "^1.10.65",
+        "pestphp/pest-plugin-type-coverage": "^v2.8.1",
+        "phpstan/phpstan": "^1.10.66",
         "rector/rector": "^1.0.3",
-        "symfony/var-dumper": "v7.0.4"
+        "symfony/var-dumper": "^v7.0.6"
     },
     "autoload": {
         "psr-4": {
