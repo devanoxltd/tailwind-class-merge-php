@@ -28,17 +28,17 @@
     "require": {
         "php": "^8.2.0",
         "psr/simple-cache": "^3.0",
-        "illuminate/support": "^v11.2.0"
+        "illuminate/support": "^v11.5"
     },
     "require-dev": {
-        "laravel/pint": "^v1.15.1",
+        "laravel/pint": "^v1.15.2",
         "nunomaduro/collision": "^v8.1.1",
-        "pestphp/pest": "^v2.34.6",
+        "pestphp/pest": "^v2.34.7",
         "pestphp/pest-plugin-arch": "^v2.7.0",
         "pestphp/pest-plugin-mock": "^2.0",
         "pestphp/pest-plugin-type-coverage": "^v2.8.1",
-        "phpstan/phpstan": "^1.10.66",
-        "rector/rector": "^1.0.3",
+        "phpstan/phpstan": "^1.10.67",
+        "rector/rector": "^1.0.4",
         "symfony/var-dumper": "^v7.0.6"
     },
     "autoload": {
