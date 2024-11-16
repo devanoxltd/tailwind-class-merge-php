@@ -33,8 +33,7 @@ class TailwindClassMerge implements TailwindClassMergeContract
     public function __construct(
         private readonly array $configuration,
         private readonly ?CacheInterface $cache = null,
-    ) {
-    }
+    ) {}
 
     /**
      * @param  string|array<array-key, string|array<array-key, string>>  ...$args
