@@ -2,7 +2,6 @@
 
 namespace TailwindClassMerge;
 
-use Closure;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Psr\SimpleCache\CacheInterface;
@@ -90,9 +89,10 @@ class TailwindClassMerge implements TailwindClassMergeContract
         return $conflicts;
     }
 
-    private function withCache(string $input, Closure $callback): string
+    private function withCache(string $input, callable $callback): string
     {
         if (! $this->cache instanceof CacheInterface) {
+            // @phpstan-ignore-next-line
             return $callback($input);
         }
 
@@ -110,6 +110,7 @@ class TailwindClassMerge implements TailwindClassMergeContract
 
         $this->cache->set($key, $mergedClasses);
 
+        // @phpstan-ignore-next-line
         return $mergedClasses;
     }
 

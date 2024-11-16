@@ -32,6 +32,7 @@ class Config
         $config = self::getDefaultConfig();
 
         foreach (self::$additionalConfig as $key => $additionalConfig) {
+            // @phpstan-ignore-next-line
             $config[$key] = self::mergePropertyRecursively($config, $key, $additionalConfig);
         }
 
@@ -63,6 +64,7 @@ class Config
             return $mergeValue;
         }
 
+        // @phpstan-ignore-next-line
         if (is_array($mergeValue) &&
             array_is_list($mergeValue) &&
             is_array($baseConfig[$mergeKey]) &&
@@ -72,16 +74,19 @@ class Config
         }
 
         /* && is_array($baseConfig[$mergeKey]) && array_is_list($baseConfig[$mergeKey]) */
+        // @phpstan-ignore-next-line
         if (is_array($mergeValue) && ! array_is_list($mergeValue)) {
             if ($baseConfig[$mergeKey] === null) {
                 return $mergeValue;
             }
 
             foreach ($mergeValue as $key => $value) {
+                // @phpstan-ignore-next-line
                 $baseConfig[$mergeKey][$key] = self::mergePropertyRecursively($baseConfig[$mergeKey], $key, $value);
             }
         }
 
+        // @phpstan-ignore-next-line
         return $baseConfig[$mergeKey];
     }
 

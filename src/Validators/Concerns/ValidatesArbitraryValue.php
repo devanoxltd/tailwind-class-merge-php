@@ -21,7 +21,7 @@ trait ValidatesArbitraryValue
                 return in_array($result[1], $labels);
             }
 
-            return $isLengthOnly($result[2] ?? null);
+            return (bool) $isLengthOnly($result[2] ?? null);
         }
 
         return false;

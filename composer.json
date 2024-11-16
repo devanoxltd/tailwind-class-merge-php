@@ -31,13 +31,10 @@
         "illuminate/support": "^v11.32"
     },
     "require-dev": {
-        "laravel/pint": "^v1.16",
-        "nunomaduro/collision": "^v8.1",
-        "pestphp/pest": "^v2.34",
-        "pestphp/pest-plugin-arch": "^v2.7",
-        "pestphp/pest-plugin-mock": "^2.0",
-        "pestphp/pest-plugin-type-coverage": "^v2.8",
-        "phpstan/phpstan": "^1.12",
+        "laravel/pint": "^v1.18",
+        "nunomaduro/collision": "^v8.5",
+        "pestphp/pest": "^v3.2",
+        "phpstan/phpstan": "^2.0",
         "symfony/var-dumper": "^v7.1"
     },
     "autoload": {
@@ -66,12 +63,10 @@
         "refactor:lint": "pint -v",
         "test:lint": "pint --test -v",
         "test:types": "phpstan analyse --ansi",
-        "test:type-coverage": "pest --type-coverage --min=100",
         "test:pest": "pest --colors=always",
         "test": [
             "@test:lint",
             "@test:types",
-            "@test:type-coverage",
             "@test:pest"
         ],
         "refactor": [

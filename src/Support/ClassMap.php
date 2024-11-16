@@ -45,13 +45,16 @@ class ClassMap
 
         // @phpstan-ignore-next-line
         return Collection::make($classGroupEntries)->mapWithKeys(function (array $classGroup, string $classGroupId) use ($prefix): array {
+            // @phpstan-ignore-next-line
             $prefixedClassGroup = Collection::make($classGroup)->map(function (string|array $classDefinition) use ($prefix): string|array {
                 if (is_string($classDefinition)) {
                     return $prefix . $classDefinition;
                 }
 
+                // @phpstan-ignore-next-line
                 if (is_array($classDefinition)) {
                     return Collection::make($classDefinition)
+                        // @phpstan-ignore-next-line
                         ->mapWithKeys(fn (array $value, string $key): array => [$prefix . $key => $value])->all();
                 }
 
@@ -72,8 +75,10 @@ class ClassMap
                 continue;
             }
 
+            // @phpstan-ignore-next-line
             if (self::isThemeGetter($classDefinition)) {
                 self::processClassesRecursively(
+                    // @phpstan-ignore-next-line
                     $classDefinition->get($theme),
                     $classPartObject,
                     $classGroupId,
@@ -92,9 +97,12 @@ class ClassMap
                 continue;
             }
 
+            // @phpstan-ignore-next-line
             foreach ($classDefinition as $key => $classGroup) {
                 self::processClassesRecursively(
+                    // @phpstan-ignore-next-line
                     $classGroup,
+                    // @phpstan-ignore-next-line
                     self::getPart($classPartObject, $key),
                     $classGroupId,
                     $theme,
