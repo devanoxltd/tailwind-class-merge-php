@@ -28,14 +28,14 @@
     "require": {
         "php": "^8.2.0",
         "psr/simple-cache": "^3.0",
-        "illuminate/support": "^v11.32"
+        "illuminate/support": "^v12.0"
     },
     "require-dev": {
-        "laravel/pint": "^v1.18",
-        "nunomaduro/collision": "^v8.5",
-        "pestphp/pest": "^v3.2",
-        "phpstan/phpstan": "^2.0",
-        "symfony/var-dumper": "^v7.1"
+        "laravel/pint": "^v1.21",
+        "nunomaduro/collision": "^v8.6",
+        "pestphp/pest": "^v3.7",
+        "phpstan/phpstan": "^2.1",
+        "symfony/var-dumper": "^v7.2"
     },
     "autoload": {
         "psr-4": {
