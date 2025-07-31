@@ -98,8 +98,10 @@ class TailwindClassMerge implements TailwindClassMergeContract
 
         $key = hash('xxh3', 'tailwind-merge-' . $input);
 
-        if ($this->cache->has($key)) {
-            $cachedValue = $this->cache->get($key);
+        // @phpstan-ignore-next-line
+        if ($this->cache->memo()->has($key)) {
+            // @phpstan-ignore-next-line
+            $cachedValue = $this->cache->memo()->get($key);
 
             if (is_string($cachedValue)) {
                 return $cachedValue;

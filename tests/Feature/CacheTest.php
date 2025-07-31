@@ -104,4 +104,9 @@ class FakeCache implements CacheInterface
 
         return $found;
     }
+
+    public function memo(): CacheInterface
+    {
+        return $this;
+    }
 }
