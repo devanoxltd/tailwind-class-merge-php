@@ -60,10 +60,12 @@ class TailwindClassMerge implements TailwindClassMergeContract
 
                     $conflictingClassGroups[$classId] = true;
 
-                    foreach ($this->getConflictingClassGroupIds(
-                        $class->classGroupId,
-                        $class->hasPostfixModifier
-                    ) as $group) {
+                    foreach (
+                        $this->getConflictingClassGroupIds(
+                            $class->classGroupId,
+                            $class->hasPostfixModifier
+                        ) as $group
+                    ) {
                         $conflictingClassGroups[$class->modifierId . $group] = true;
                     }
 
@@ -99,9 +101,9 @@ class TailwindClassMerge implements TailwindClassMergeContract
         $key = hash('xxh3', 'tailwind-merge-' . $input);
 
         // @phpstan-ignore-next-line
-        if ($this->cache->memo()->has($key)) {
+        if ((method_exists($this->cache, 'memo') ? $this->cache->memo()->has($key) : $this->cache->has($key))) {
             // @phpstan-ignore-next-line
-            $cachedValue = $this->cache->memo()->get($key);
+            $cachedValue = method_exists($this->cache, 'memo') ? $this->cache->memo()->get($key) : $this->cache->get($key);
 
             if (is_string($cachedValue)) {
                 return $cachedValue;
