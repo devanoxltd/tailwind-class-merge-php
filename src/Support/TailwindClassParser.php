@@ -36,7 +36,7 @@ class TailwindClassParser
         }
 
         $currentClassPart = $classParts[0] ?? null;
-        $nextClassPartObject = $classPartObject->nextPart[$currentClassPart] ?? null;
+        $nextClassPartObject = $currentClassPart === null ? null : ($classPartObject->nextPart[$currentClassPart] ?? null);
         $classGroupFromNextClassPart = $nextClassPartObject !== null
             ? self::getGroupRecursive(array_slice($classParts, 1), $nextClassPartObject)
             : null;
