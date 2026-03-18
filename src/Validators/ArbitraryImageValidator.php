@@ -3,12 +3,13 @@
 namespace TailwindClassMerge\Validators;
 
 use Illuminate\Support\Str;
+use TailwindClassMerge\Contracts\ValidatorContract;
 use TailwindClassMerge\Validators\Concerns\ValidatesArbitraryValue;
 
 /**
  * @internal
  */
-class ArbitraryImageValidator implements \TailwindClassMerge\Contracts\ValidatorContract
+class ArbitraryImageValidator implements ValidatorContract
 {
     use ValidatesArbitraryValue;
 

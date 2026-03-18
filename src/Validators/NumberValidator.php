@@ -2,10 +2,12 @@
 
 namespace TailwindClassMerge\Validators;
 
+use TailwindClassMerge\Contracts\ValidatorContract;
+
 /**
  * @internal
  */
-class NumberValidator implements \TailwindClassMerge\Contracts\ValidatorContract
+class NumberValidator implements ValidatorContract
 {
     public static function validate(string $value): bool
     {

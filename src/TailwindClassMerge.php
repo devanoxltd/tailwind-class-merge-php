@@ -39,7 +39,9 @@ class TailwindClassMerge implements TailwindClassMergeContract
      */
     public function merge(...$args): string
     {
-        $input = Arr::toCssClasses($this->createArrayFromArgs($args));
+        /** @var array<int|string, bool|int|string> $classList */
+        $classList = $this->createArrayFromArgs($args);
+        $input = Arr::toCssClasses($classList);
 
         return $this->withCache($input, function (string $input): string {
             $conflictingClassGroups = [];
@@ -120,16 +122,20 @@ class TailwindClassMerge implements TailwindClassMergeContract
 
     /**
      * @param  array<mixed>  $args
-     * @return array<mixed>
+     * @return array<int|string, bool|int|string>
      */
     private function createArrayFromArgs(array $args = []): array
     {
+        /** @var array<int|string, bool|int|string> $result */
         $result = [];
+
         foreach ($args as $key => $value) {
             if (is_array($value)) {
                 $result = array_merge($result, $this->createArrayFromArgs($value));
             } elseif (is_numeric($key)) {
-                $result[] = $value;
+                if (is_bool($value) || is_int($value) || is_string($value)) {
+                    $result[] = $value;
+                }
             } elseif (is_bool($value)) {
                 $result[$key] = $value;
             } else {

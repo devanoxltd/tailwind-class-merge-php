@@ -3,11 +3,12 @@
 namespace TailwindClassMerge\Validators;
 
 use Illuminate\Support\Str;
+use TailwindClassMerge\Contracts\ValidatorContract;
 
 /**
  * @internal
  */
-class PercentValidator implements \TailwindClassMerge\Contracts\ValidatorContract
+class PercentValidator implements ValidatorContract
 {
     public static function validate(string $value): bool
     {

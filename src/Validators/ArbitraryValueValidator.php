@@ -3,11 +3,12 @@
 namespace TailwindClassMerge\Validators;
 
 use Illuminate\Support\Str;
+use TailwindClassMerge\Contracts\ValidatorContract;
 
 /**
  * @internal
  */
-class ArbitraryValueValidator implements \TailwindClassMerge\Contracts\ValidatorContract
+class ArbitraryValueValidator implements ValidatorContract
 {
     final public const ARBITRARY_VALUE_REGEX = '/^\[(?:([a-z-]+):)?(.+)\]$/i';
 

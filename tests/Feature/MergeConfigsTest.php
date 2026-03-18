@@ -1,5 +1,7 @@
 <?php
 
+use TailwindClassMerge\Support\Config;
+
 it('merge the config correctly', function () {
-    $config = \TailwindClassMerge\Support\Config::getMergedConfig();
+    $config = Config::getMergedConfig();
 })->todo();

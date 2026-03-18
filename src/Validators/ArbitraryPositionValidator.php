@@ -2,12 +2,13 @@
 
 namespace TailwindClassMerge\Validators;
 
+use TailwindClassMerge\Contracts\ValidatorContract;
 use TailwindClassMerge\Validators\Concerns\ValidatesArbitraryValue;
 
 /**
  * @internal
  */
-class ArbitraryPositionValidator implements \TailwindClassMerge\Contracts\ValidatorContract
+class ArbitraryPositionValidator implements ValidatorContract
 {
     use ValidatesArbitraryValue;
 
